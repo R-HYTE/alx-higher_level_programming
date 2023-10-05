@@ -4,3 +4,11 @@ add_0.py
 calculator_1.py
 variable_load_5.py
 calculator_1.py
+
+# Ignore the .pyc files
+# When you run a Python script (e.g., example.py) for the first time, the Python interpreter compiles the source code into bytecode.
+# The bytecode is stored in a file with the same name as the script but with a .pyc extension (e.g., example.pyc).
+# If you run the same script again later, Python checks if a .pyc file with a matching name and timestamp exists. If it does, and the .py file hasn't been modified since the .pyc file was created, Python uses the .pyc file for faster startup.
+
+__pycache__/
+hidden_4.pyc

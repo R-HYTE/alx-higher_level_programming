@@ -1,15 +1,16 @@
 #!/usr/bin/python3
-
 import sys
 
+
 def is_safe(board, row, col):
-    """ Check if it is safe to place a queen at the specified position on the chessboard """
+    """ Check if safe to place a queen at the  position on the chessboard """
     for i in range(col):
         if board[i] == row or \
            board[i] - i == row - col or \
            board[i] + i == row + col:
             return False
     return True
+
 
 def solve_nqueens(n):
     """ Solve the N-Queens problem and return all possible solutions """
@@ -27,12 +28,14 @@ def solve_nqueens(n):
     solve([], 0)
     return solutions
 
+
 def print_solutions(solutions):
     """ Print the solutions for the N-Queens problem to the console """
     for solution in solutions:
         for row in solution:
             print("[{}, {}]".format(solution.index(row), row), end=" ")
         print()
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
@@ -50,4 +53,3 @@ if __name__ == "__main__":
 
     solutions = solve_nqueens(N)
     print_solutions(solutions)
-

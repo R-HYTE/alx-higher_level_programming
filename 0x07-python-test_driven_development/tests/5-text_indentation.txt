@@ -1,0 +1,39 @@
+================================
+Testing text_indentation()
+================================
+
+Import file
+    >>> text_indentation = __import__('5-text_indentation').text_indentation
+
+
+Expectation when:
+
+no argument passed
+>>> text_indentation()
+Traceback (most recent call last):
+TypeError: text_indentation() missing 1 required positional argument: 'text'
+
+more than 1 string argument passed
+>>> text_indentation("Enjoying", "the", "ALX", "Experience")
+Traceback (most recent call last):
+TypeError: text_indentation() takes 1 positional argument but 4 were given
+
+none string argument passed
+>>> text_indentation(24)
+Traceback (most recent call last):
+TypeError: text must be a string
+
+empty string passed as argument
+>>> text_indentation("")
+<BLANKLINE>
+
+with delimiter present
+>>> text_indentation("Doing hard things.")
+Doing hard things.
+<BLANKLINE>
+<BLANKLINE>
+
+with delimiter absent
+>>> text_indentation("ALX")
+ALX
+

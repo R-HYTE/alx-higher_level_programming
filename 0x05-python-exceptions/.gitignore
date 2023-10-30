@@ -1,2 +1,4 @@
 # Ignore Tester files
 *main.py
+# Ignore cache
+__pycache__

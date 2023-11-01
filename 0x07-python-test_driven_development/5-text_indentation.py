@@ -16,7 +16,7 @@ def text_indentation(text):
             result += char + "\n\n"
             newline_flag = True
         elif char == ' ' and newline_flag:
-                continue
+            continue
         else:
             result += char
             newline_flag = False

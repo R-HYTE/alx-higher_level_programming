@@ -15,14 +15,11 @@ def text_indentation(text):
         if char in ['.', '?', ':']:
             result += char + "\n\n"
             newline_flag = True
+        elif char == ' ' and newline_flag:
+                continue
         else:
-            if newline_flag:
-                if char != ' ':
-                    result += char
-                newline_flag = False
-            else:
-                if char != ' ':
-                    result += char
+            result += char
+            newline_flag = False
 
     result = result.replace("\n ", "\n")
     print(result)

@@ -3,7 +3,8 @@
 
 
 def text_indentation(text):
-    """text index"""
+    """ prints a text with 2 new lines after: . , ? and : """
+
     if not isinstance(text, str):
         raise TypeError("text must be a string")
 
@@ -23,6 +24,7 @@ def text_indentation(text):
                 result += char
 
     print(result)
+
 
 if __name__ == "__main__":
     import doctest

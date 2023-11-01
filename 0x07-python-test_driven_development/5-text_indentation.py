@@ -21,10 +21,10 @@ def text_indentation(text):
                     result += char
                 newline_flag = False
             else:
-                result += char
-                if char == ' ':
-                    newline_flag = True
+                if char != ' ':
+                    result += char
 
+    result = result.replace("\n ", "\n")
     print(result)
 
 

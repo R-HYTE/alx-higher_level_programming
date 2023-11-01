@@ -21,7 +21,6 @@ def text_indentation(text):
             result += char
             newline_flag = False
 
-    result = result.replace("\n ", "\n")
     print(result)
 
 

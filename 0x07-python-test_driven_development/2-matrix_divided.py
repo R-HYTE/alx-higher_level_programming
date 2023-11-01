@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+""" This module has a function that manipulates a matrix """
+
 
 def matrix_divided(matrix, div):
     """ Divides all elements of a matrix """

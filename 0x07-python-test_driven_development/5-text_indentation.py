@@ -22,6 +22,8 @@ def text_indentation(text):
                 newline_flag = False
             else:
                 result += char
+                if char == ' ':
+                    newline_flag = True
 
     print(result)
 

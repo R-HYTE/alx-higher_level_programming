@@ -1,0 +1,56 @@
+==========================================
+How to use the sorted method in List class
+==========================================
+
+>>> MyList = __import__('1-my_list').MyList
+>>> my_list = MyList()
+>>> isinstance(my_list, list)
+True
+>>> my_list.print_sorted()
+[]
+
+adding items in the list
+>>> my_list.append(9)
+>>> my_list.append(6)
+>>> my_list.append(1)
+>>> my_list.print_sorted()
+[1, 6, 9]
+
+>>> my_list.append(0)
+>>> my_list.print_sorted()
+[0, 1, 6, 9]
+
+>>> my_list.append(-9)
+>>> my_list.print_sorted()
+[-9, 0, 1, 6, 9]
+
+>>> my_list.append(int('inf'))
+Traceback (most recent call last):
+ValueError: invalid literal for int() with base 10: 'inf'
+
+>>> my_list.append(9)
+>>> my_list.append(6)
+>>> my_list.print_sorted()
+[-9, 0, 1, 6, 6, 9, 9]
+
+>>> my_list.clear()
+>>> my_list.append(9)
+>>> my_list.append(9)
+>>> my_list.append(9)
+>>> my_list.append(9)
+>>> my_list.print_sorted()
+[9, 9, 9, 9]
+
+with a max integer
+>>> my_list.append(20000000000000000000000000000000000000000)
+>>> my_list.print_sorted()
+[9, 9, 9, 9, 20000000000000000000000000000000000000000]
+
+>>> my_list.append(None)
+>>> my_list.print_sorted()
+Traceback (most recent call last):
+TypeError: '<' not supported between instances of 'NoneType' and 'int'
+
+>>> my_list.append(NULL)
+Traceback (most recent call last):
+NameError: name 'NULL' is not defined

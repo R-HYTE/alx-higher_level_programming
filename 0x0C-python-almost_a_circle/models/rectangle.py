@@ -59,7 +59,7 @@ class Rectangle(Base):
 
     def validate_integer(self, name, value, eq=True):
         ''' Validates value of attributes '''
-        if type(value) != int:
+        if not isinstance(value, int):
             raise TypeError(f"{name} must be an integer")
         if eq and value < 0:
             raise ValueError(f"{name} must be >= 0")
@@ -70,3 +70,11 @@ class Rectangle(Base):
         ''' Computes the area of the rectangle '''
         return self.width * self.height
 
+    def display(self):
+        ''' Dispalys the rectangle with # character '''
+        for _ in range(self.height):
+            print("#" * self.width)
+
+    def __str__(self):
+        ''' String representation of the Rectangle '''
+        return f"[Rectangle] ({self.id}) {self.x}/{self.y} - {self.width}/{self.height}"

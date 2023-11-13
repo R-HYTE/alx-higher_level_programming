@@ -8,14 +8,14 @@ class Rectangle(Base):
     def __init__(self, width, height, x=0, y=0, id=None):
         ''' Constructor for the Rectangle class '''
         super().__init__(id)
-        self.__width = width
-        self.__height = height
-        self.__x = x
-        self.__y = y
+        self.width = width
+        self.height = height
+        self.x = x
+        self.y = y
 
     @property
     def width(self):
-        """ Rectange's width """
+        """ Getter for Rectange's width """
         return self.__width
 
     @width.setter
@@ -26,7 +26,7 @@ class Rectangle(Base):
 
     @property
     def height(self):
-        """ Rectangle's height """
+        """ Rectangle's height getter """
         return self.__height
 
     @height.setter
@@ -57,14 +57,14 @@ class Rectangle(Base):
         self.validate_integer("y", value)
         self.__y = value
 
-    def validate_integer(self, name, value, eq=True):
-        ''' Validates value of attributes '''
+    def validate_integer(self, attribute_name, value, non_negative=True):
+        ''' Validating the value '''
         if not isinstance(value, int):
-            raise TypeError(f"{name} must be an integer")
-        if eq and value < 0:
-            raise ValueError(f"{name} must be >= 0")
-        elif not eq and value < 0:
-            raise ValueError(f"{name} must be >= 0")
+            raise TypeError(f"{attribute_name} must be an integer")
+        if non_negative and value < 0:
+            raise ValueError(f"{attribute_name} must be >= 0")
+        elif not non_negative and value <= 0:
+            raise ValueError(f"{attribute_name} must be > 0")
 
     def area(self):
         ''' Computes the area of the rectangle '''
@@ -80,3 +80,20 @@ class Rectangle(Base):
     def __str__(self):
         ''' String representation of the Rectangle '''
         return f"[Rectangle] ({self.id}) {self.x}/{self.y} - {self.width}/{self.height}"
+
+    def update(self, *args, **kwargs):
+        ''' Assigns positional and keyword arguments to attributes '''
+        if len(args) >= 1:
+            self.id = args[0]
+        if len(args) >= 2:
+            self.width = args[1]
+        if len(args) >= 3:
+            self.height = args[2]
+        if len(args) >= 4:
+            self.x = args[3]
+        if len(args) >= 5:
+            self.y = args[4]
+        elif kwargs:
+            # If **kwargs is not empty, update attributes using keyword arguments
+            for key, value in kwargs.items():
+                setattr(self, key, value)

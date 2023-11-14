@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ This module has the base class of the projects"""
+import json
 
 
 class Base:
@@ -16,3 +17,11 @@ class Base:
             self.id = Base.__nb_objects
         else:
             self.id = id
+
+    @staticmethod
+    def to_json_string(list_dictionaries):
+        ''' Returns the JSON string representation of list_dictionaries '''
+        if not list_dictionaries or len(list_dictionaries) == 0:
+            return "[]"
+        else:
+            return json.dumps(list_dictionaries)

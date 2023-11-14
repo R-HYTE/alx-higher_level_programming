@@ -1,2 +1,4 @@
 # Python - Almost a circle project
-*main.py files are python scripts used to test functionality of models
+- models : Python package that contains the functionality scripts
+- *main.py files : python scripts used to test functionality of models
+- tests : contain the folders with the unittest files

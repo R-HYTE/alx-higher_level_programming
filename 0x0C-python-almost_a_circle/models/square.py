@@ -47,10 +47,11 @@ class Square(Rectangle):
             if len(args) >= 4:
                 self.y = args[3]
         elif kwargs:
-            # If **kwargs is not empty, update attributes using keyword arguments
+            # If **kwargs is not empty, update attributes
             for key, value in kwargs.items():
                 setattr(self, key, value)
 
     def to_dictionary(self):
         '''Returns dictionary representation of this class.'''
-        return {"id": self.id, "width": self.width, "height": self.height, "x": self.x, "y": self.y}
+        return {"id": self.id, "width": self.width, "height": self.height,
+                "x": self.x, "y": self.y}

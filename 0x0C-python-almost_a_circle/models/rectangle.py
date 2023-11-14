@@ -79,7 +79,8 @@ class Rectangle(Base):
 
     def __str__(self):
         ''' String representation of the Rectangle '''
-        return f"[Rectangle] ({self.id}) {self.x}/{self.y} - {self.width}/{self.height}"
+        return f"[Rectangle] ({self.id}) {self.x}/{self.y} - \
+    {self.width}/{self.height}"
 
     def update(self, *args, **kwargs):
         ''' Assigns positional and keyword arguments to attributes '''
@@ -94,6 +95,6 @@ class Rectangle(Base):
         if len(args) >= 5:
             self.y = args[4]
         elif kwargs:
-            # If **kwargs is not empty, update attributes using keyword arguments
+            # If **kwargs is not empty, update attributes
             for key, value in kwargs.items():
                 setattr(self, key, value)

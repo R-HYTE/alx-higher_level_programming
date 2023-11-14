@@ -80,7 +80,7 @@ class Rectangle(Base):
     def __str__(self):
         ''' String representation of the Rectangle '''
         return f"[Rectangle] ({self.id}) {self.x}/{self.y} - \
-    {self.width}/{self.height}"
+{self.width}/{self.height}"
 
     def update(self, *args, **kwargs):
         ''' Assigns positional and keyword arguments to attributes '''

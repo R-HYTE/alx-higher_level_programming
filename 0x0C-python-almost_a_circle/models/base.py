@@ -37,3 +37,11 @@ class Base:
 
         with open(filename, 'w') as file:
             file.write(json_string)
+
+    @staticmethod
+    def from_json_string(json_string):
+        ''' Returns the list of dictionaries from the JSON string rep '''
+        if not json_string or json_string == "[]":
+            return []
+        else:
+            return json.loads(json_string)

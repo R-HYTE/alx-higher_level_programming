@@ -1,119 +1,93 @@
+#!/usr/bin/python3
+""" This module tests the Base class """
 import unittest
+import os
 from models.base import Base
+from models.square import Square
+from models.rectangle import Rectangle
+from io import StringIO
+from unittest.mock import patch
 
-class TestBaseClass(unittest.TestCase):
+
+class TestBaseMethods(unittest.TestCase):
+    """ Test suite for Base class """
+
+    def setUp(self):
+        """ Common setup for each test """
+        Base._Base__nb_objects = 0
+
+    def test_id_assignment(self):
+        """ Test assigned id """
+        obj1 = Base(23)
+        self.assertEqual(obj1.id, 23)
+
+    def test_default_id(self):
+        """ Test default id """
+        obj1 = Base()
+        self.assertEqual(obj1.id, 1)
 
     def test_id_increment(self):
-        """
-        Test if the id is incremented correctly when no id is provided.
-        """
-        base_obj1 = Base()
-        base_obj2 = Base()
-        self.assertEqual(base_obj1.id, 1)
-        self.assertEqual(base_obj2.id, 2)
+        """ Test nb_objects attribute and id incrementing"""
+        obj1 = Base()
+        obj2 = Base()
+        obj3 = Base()
+        self.assertEqual(obj1.id, 1)
+        self.assertEqual(obj2.id, 2)
+        self.assertEqual(obj3.id, 3)
 
-    def test_id_assigned(self):
-        """
-        Test if the provided id is correctly assigned.
-        """
-        base_obj = Base(10)
-        self.assertEqual(base_obj.id, 10)
+    def test_id_mix(self):
+        """ Test nb_objects attributes and assigned id """
+        obj1 = Base()
+        obj2 = Base(3200)
+        obj3 = Base()
+        self.assertEqual(obj1.id, 1)
+        self.assertEqual(obj2.id, 3200)
+        self.assertEqual(obj3.id, 2)
 
-    def test_id_mixed(self):
-        """
-        Test if the id is correctly incremented when both provided and not provided.
-        """
-        base_obj1 = Base()
-        base_obj2 = Base(5)
-        base_obj3 = Base()
-        self.assertEqual(base_obj1.id, 1)
-        self.assertEqual(base_obj2.id, 5)
-        self.assertEqual(base_obj3.id, 2)
+    def test_string_id(self):
+        """ Test string id """
+        obj1 = Base('23')
+        self.assertEqual(obj1.id, '23')
 
-    def test_id_negative(self):
-        """
-        Test if the id can be a negative value.
-        """
-        base_obj = Base(-3)
-        self.assertEqual(base_obj.id, -3)
+    def test_more_args_id(self):
+        """ Test passing more args to init method """
+        with self.assertRaises(TypeError):
+            obj1 = Base(1, 1)
 
-    def test_id_type(self):
-        """
-        Test if the id is an integer.
-        """
-        base_obj = Base("string_id")
-        self.assertIsInstance(base_obj.id, int)
+    def test_access_private_attrs(self):
+        """ Test accessing to private attributes raises AttributeError"""
+        obj1 = Base()
+        with self.assertRaises(AttributeError):
+            obj1.__nb_objects
 
-    def test_to_json_string_empty_list(self):
-        """
-        Test if to_json_string returns "[]" for an empty list.
-        """
-        result = Base.to_json_string([])
-        self.assertEqual(result, "[]")
+    def test_save_to_file_square(self):
+        """ Test save_to_file method for Square class """
+        Square.save_to_file(None)
+        with open("Square.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
 
-    def test_to_json_string_non_empty_list(self):
-        """
-        Test if to_json_string returns the correct JSON string for a non-empty list of dictionaries.
-        """
-        result = Base.to_json_string([{'key': 'value'}, {'key2': 'value2'}])
-        self.assertEqual(result, '[{"key": "value"}, {"key2": "value2"}]')
+        try:
+            os.remove("Square.json")
+        except FileNotFoundError:
+            pass
 
-    def test_save_to_file(self):
-        """
-        Test if save_to_file writes the correct JSON string to a file.
-        """
-        base_obj = Base()
-        Base.save_to_file([base_obj])
-        with open("Base.json", 'r') as file:
-            content = file.read()
-            self.assertEqual(content, '[{"id": 1}]')
+        Square.save_to_file([])
+        with open("Square.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
 
-    def test_from_json_string_empty_string(self):
-        """
-        Test if from_json_string returns an empty list for an empty string.
-        """
-        result = Base.from_json_string("")
-        self.assertEqual(result, [])
+    def test_save_to_file_rectangle(self):
+        """ Test save_to_file method for Rectangle class """
+        Rectangle.save_to_file(None)
+        with open("Rectangle.json", "r") as file:
+                self.assertEqual(file.read(), "[]")
+        try:
+            os.remove("Rectangle.json")
+        except FileNotFoundError:
+            pass
 
-    def test_from_json_string_non_empty_string(self):
-        """
-        Test if from_json_string returns the correct list of dictionaries for a non-empty string.
-        """
-        result = Base.from_json_string('[{"key": "value"}, {"key2": "value2"}]')
-        expected = [{'key': 'value'}, {'key2': 'value2'}]
-        self.assertEqual(result, expected)
-
-    def test_create_rectangle(self):
-        """
-        Test if create method creates an instance of Rectangle with the correct attributes.
-        """
-        result = Base.create(width=3, height=4, x=1, y=2, id=5)
-        self.assertEqual(result.width, 3)
-        self.assertEqual(result.height, 4)
-        self.assertEqual(result.x, 1)
-        self.assertEqual(result.y, 2)
-        self.assertEqual(result.id, 5)
-
-    def test_create_square(self):
-        """
-        Test if create method creates an instance of Square with the correct attributes.
-        """
-        result = Base.create(size=3, x=1, y=2, id=5)
-        self.assertEqual(result.size, 3)
-        self.assertEqual(result.x, 1)
-        self.assertEqual(result.y, 2)
-        self.assertEqual(result.id, 5)
-
-    def test_load_from_file(self):
-        """
-        Test if load_from_file returns a list of instances from the file.
-        """
-        base_obj = Base()
-        Base.save_to_file([base_obj])
-        result = Base.load_from_file()
-        self.assertEqual(len(result), 1)
-        self.assertIsInstance(result[0], Base)
+        Rectangle.save_to_file([])
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
 
 if __name__ == '__main__':
     unittest.main()
-

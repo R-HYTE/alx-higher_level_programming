@@ -8,22 +8,22 @@ Base = base.Base
 class TestBase(unittest.TestCase):
     ''' Testing the base class '''
     def test_base(self):
-        b0 = Base()
-        b1 = Base()
-        b2 = Base(-3)
-        b3 = Base(12)
-        b4 = Base(2.5)
-        b5 = Base(None)
-        b6 = Base()
-        b7 = Base()
-        self.assertEqual(b0.id, 1)
-        self.assertEqual(b1.id, 2)
-        self.assertEqual(b2.id, -3)
-        self.assertEqual(b3.id, 12)
-        self.assertEqual(b4.id, 2.5)
-        self.assertEqual(b5.id, 3)
-        self.assertEqual(b6.id, 4)
-        self.assertEqual(b7.id, 5)
+        obj1 = Base()
+        obj2 = Base()
+        obj3 = Base(-3)
+        obj4 = Base(12)
+        obj5 = Base(2.5)
+        obj6 = Base(None)
+        obj7 = Base()
+        obj8 = Base()
+        self.assertEqual(obj1.id, 1)
+        self.assertEqual(obj2.id, 2)
+        self.assertEqual(obj3.id, -3)
+        self.assertEqual(obj4.id, 12)
+        self.assertEqual(obj5.id, 2.5)
+        self.assertEqual(obj6.id, 3)
+        self.assertEqual(obj7.id, 4)
+        self.assertEqual(obj8.id, 5)
 
 
 

@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/node
 
-// Declare a const variable with a descriptive name
+// Declare a constant variable with a descriptive name
 const myVar = 'JavaScript is amazing';
 
 // Print the message to the console

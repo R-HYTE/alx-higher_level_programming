@@ -27,8 +27,8 @@ def search_states():
                          user=username, passwd=password, db=database)
     cursor = db.cursor()
 
-    cursor.execute("SELECT * FROM states WHERE name = '{}' ORDER BY id;"
-                   .format(state_name))
+    cursor.execute("SELECT * FROM states WHERE LOWER(name) = LOWER('{}')\
+                   ORDER BY id;".format(state_name))
 
     results = cursor.fetchall()
     for row in results:

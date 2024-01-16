@@ -34,8 +34,12 @@ def filter_cities_by_state():
     cursor.execute(query, (state_name,))
 
     result = cursor.fetchone()
-    city_list = result[0] if result else None
-    print(city_list)
+
+    if result and result[0]:
+        city_list = result[0]
+        print(city_list)
+    else:
+        print("No cities found for the state '{}'.".format(state_name))
 
     if db:
         db.close()

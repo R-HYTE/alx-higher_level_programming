@@ -26,20 +26,17 @@ def filter_cities_by_state():
     cursor = db.cursor()
 
     query = """
-        SELECT GROUP_CONCAT(cities.name ORDER BY cities.id) AS city_list
-        FROM cities
+        SELECT * FROM cities
         JOIN states ON cities.state_id = states.id
-        WHERE states.name = %s;
+        WHERE states.name = %s
+        ORDER BY cities.id;
     """
     cursor.execute(query, (state_name,))
 
-    result = cursor.fetchone()
+    results = cursor.fetchall()
 
-    if result and result[0]:
-        city_list = result[0]
-        print(city_list)
-    else:
-        print("No cities found for the state '{}'.".format(state_name))
+    for row in results:
+        print(row[2])  # Assuming the city name is in the third column
 
     if db:
         db.close()

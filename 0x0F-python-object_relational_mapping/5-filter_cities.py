@@ -1,13 +1,13 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
-Lists cities in a given state from a MySQL database.
+Lists cities in a given state from the hbtn_0e_4_usa database using MySQLdb.
 """
 
 import MySQLdb
 from sys import argv
 
 
-def get_city_names_by_state(username, password, database, state_name):
+def list_cities_by_state(username, password, database, state_name):
     """
     Retrieves and prints the names of cities in the specified state.
 
@@ -63,4 +63,4 @@ if __name__ == "__main__":
         script, username, password, database, state_name = argv
 
         # Calling the function to retrieve and print city names
-        get_city_names_by_state(username, password, database, state_name)
+        list_cities_by_state(username, password, database, state_name)

@@ -9,7 +9,7 @@ def fetch_alx_intranet_status():
     Fetches the status from https://alx-intranet.hbtn.io and prints the response.
     """
     url = "https://alx-intranet.hbtn.io/status"
-    
+
     try:
         # Send an HTTP GET request to the specified URL
         response = requests.get(url)

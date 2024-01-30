@@ -1,13 +1,12 @@
 #!/usr/bin/python3
 """
-This script takes a URL as a command-line argument,
-sends a request to that URL,
-and displays the value of the X-Request-Id header in the response.
+This script takes a URL, sends a request to the URL,
+and displays the value of the X-Request-Id variable
+found in the header of the response.
 """
 
 import sys
 import urllib.request
-import urllib.error
 
 
 def get_x_request_id(url):
@@ -19,7 +18,7 @@ def get_x_request_id(url):
         url (str): The URL to send the request to.
 
     Returns:
-        str or None: The value of the X-Request-Id header,
+        str or None: The value of the X-Request-Id header
         None if the header is not present.
     """
     try:
@@ -27,29 +26,18 @@ def get_x_request_id(url):
         with urllib.request.urlopen(req) as response:
             headers = dict(response.headers)
             x_request_id = headers.get("X-Request-Id")
-            if x_request_id is not None:
-                return x_request_id
-            else:
-                print(f"X-Request-Id not found in HTTP header for URL: {url}")
-                return None
-    except urllib.error.HTTPError as e:
-        if e.code == 404:
-            print(f"X-Request-Id not found in the HTTP header for URL: {url}")
-        else:
-            print(f"Error during request to {url}: {e}")
-        return None
+            return x_request_id
+
     except urllib.error.URLError as e:
         print(f"Error during request to {url}: {e}")
         return None
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
-        print("Usage: python script.py <URL>")
-        sys.exit(1)
     url = sys.argv[1]
     x_request_id = get_x_request_id(url)
+
     if x_request_id is not None:
-        print(f"{x_request_id}")
+        print(x_request_id)
     else:
         print("Unable to retrieve X-Request-Id.")

@@ -45,7 +45,7 @@ def main():
 
     url = sys.argv[1]
     email = sys.argv[2]
-    
+
     get_response_body(url, email)
 
 

@@ -19,7 +19,10 @@ def perform_user_search(letter=""):
         None: Displays the result as specified.
     """
     search_payload = {"q": letter}
-    response = requests.post("http://0.0.0.0:5000/search_user", data=search_payload)
+    response = requests.post(
+        "http://0.0.0.0:5000/search_user",
+        data=search_payload
+    )
 
     try:
         user_data = response.json()

@@ -7,6 +7,7 @@ and displays the value of the X-Request-Id header in the response.
 
 import sys
 import urllib.request
+import urllib.error
 
 
 def get_x_request_id(url):
@@ -25,22 +26,29 @@ def get_x_request_id(url):
         req = urllib.request.Request(url)
         with urllib.request.urlopen(req) as response:
             headers = dict(response.headers)
-            return headers.get("X-Request-Id")
-
+            x_request_id = headers.get("X-Request-Id")
+            if x_request_id is not None:
+                return x_request_id
+            else:
+                print(f"X-Request-Id not found in HTTP header for URL: {url}")
+                return None
+    except urllib.error.HTTPError as e:
+        if e.code == 404:
+            print(f"X-Request-Id not found in the HTTP header for URL: {url}")
+        else:
+            print(f"Error during request to {url}: {e}")
+        return None
     except urllib.error.URLError as e:
         print(f"Error during request to {url}: {e}")
         return None
 
 
 if __name__ == '__main__':
-    # Check if a URL is provided as a command-line argument
     if len(sys.argv) != 2:
         print("Usage: python script.py <URL>")
         sys.exit(1)
-
     url = sys.argv[1]
     x_request_id = get_x_request_id(url)
-
     if x_request_id is not None:
         print(f"{x_request_id}")
     else:

@@ -6,7 +6,7 @@ import requests
 
 def fetch_alx_intranet_status():
     """
-    Fetches the status from https://alx-intranet.hbtn.io and prints the response.
+    Fetches status from https://alx-intranet.hbtn.io and prints the response.
     """
     url = "https://alx-intranet.hbtn.io/status"
 
